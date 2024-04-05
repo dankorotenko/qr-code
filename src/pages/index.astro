@@ -1,0 +1,85 @@
+---
+
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <main class="max-w-md h-svh mx-auto bg-zinc-900 relative py-6">
+      <input
+        type="text"
+        id="url-input"
+        placeholder="Type text"
+        class="input input-bordered input-primary w-full block max-w-xs mx-auto mb-8"
+      />
+      <select
+        id="extension-select"
+        class="select select-primary w-full block max-w-xs mx-auto mb-8"
+      >
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+        <option value="webp">WEBP</option>
+      </select>
+      <div id="qr-code-container" class="w-[300px] h-[300px] mx-auto mb-8">
+      </div>
+      <button
+        id="download-button"
+        class="btn btn-primary block mx-auto"
+        disabled
+      >
+        Download
+      </button>
+    </main>
+  </body>
+</html>
+
+<script>
+  //@ts-nocheck
+  import QRCodeStyling from "qr-code-styling-2";
+
+  const qrCode = new QRCodeStyling({
+    width: 300,
+    height: 300,
+    // image:
+    //   "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg",
+    dotsOptions: {
+      color: "#000000",
+      type: "square",
+    },
+    // imageOptions: {
+    //   crossOrigin: "anonymous",
+    //   margin: 20,
+    // },
+  });
+
+  // Get references to HTML elements
+  const urlInput = document.getElementById("url-input");
+  const extensionSelect = document.getElementById("extension-select");
+  const qrCodeContainer = document.getElementById("qr-code-container");
+  const downloadButton = document.getElementById("download-button");
+
+  // Append QR code to container
+  qrCode.append(qrCodeContainer);
+
+  // Event listeners for input and button interactions
+  urlInput.addEventListener("input", () => {
+    const url = urlInput.value;
+    qrCode.update({ data: url });
+    downloadButton.disabled = url === "";
+  });
+
+  extensionSelect.addEventListener("change", () => {
+    const fileExt = extensionSelect.value;
+  });
+
+  downloadButton.addEventListener("click", () => {
+    const fileExt = extensionSelect.value;
+    qrCode.download({ extension: fileExt });
+  });
+</script>
