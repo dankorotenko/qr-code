@@ -5,13 +5,17 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="manifest" href="/manifest.json">
     <title>Astro</title>
   </head>
   <body>
     <main class="max-w-md h-svh mx-auto bg-zinc-900 relative py-6">
+      <div id="qr-code-container" class="w-[300px] h-[300px] mx-auto mb-8">
+      </div>
+
       <input
         type="text"
         id="url-input"
@@ -26,8 +30,6 @@
         <option value="jpeg">JPEG</option>
         <option value="webp">WEBP</option>
       </select>
-      <div id="qr-code-container" class="w-[300px] h-[300px] mx-auto mb-8">
-      </div>
       <button
         id="download-button"
         class="btn btn-primary block mx-auto"
@@ -64,10 +66,8 @@
   const qrCodeContainer = document.getElementById("qr-code-container");
   const downloadButton = document.getElementById("download-button");
 
-  // Append QR code to container
   qrCode.append(qrCodeContainer);
 
-  // Event listeners for input and button interactions
   urlInput.addEventListener("input", () => {
     const url = urlInput.value;
     qrCode.update({ data: url });
