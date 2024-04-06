@@ -1,7 +1,7 @@
 {
   "name": "QR Code Generator",
   "short_name": "QR Code",
-  "start_url": "index.html?utm_source=homescreen",
+  "start_url": "https://qr-code-beryl-phi.vercel.app/",
   "scope": "./",
   "icons": [
     {
@@ -21,5 +21,8 @@
   "id": "qr-code-gen",
   "description": "A simple but powerful QR Code generator",
   "lang": "en",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
 }
