@@ -8,8 +8,8 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="manifest" href="/manifest.json">
-    <title>Astro</title>
+    <link rel="manifest" href="/manifest.json" />
+    <title>QR Code Generator</title>
   </head>
   <body>
     <main class="max-w-md h-svh mx-auto bg-zinc-900 relative py-6">
@@ -40,7 +40,11 @@
     </main>
   </body>
 </html>
-
+<script>
+  if (typeof navigator.serviceWorker !== "undefined") {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
 <script>
   //@ts-nocheck
   import QRCodeStyling from "qr-code-styling-2";
